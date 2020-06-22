@@ -18,4 +18,6 @@ RUN echo “export VISIBLE=now” >> /etc/profile
 EXPOSE 22
 CMD [“/usr/sbin/sshd”, “-D”]
 
-HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://localhost:9000 || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD curl --fail http://localhost:9000/health-check || exit 1
+HEALTHCHECK --interval=5s --timeout=3s CMD curl http://localhost:9000/health-check || exit 1
+HEALTHCHECK curl http://localhost:9000/health-check
